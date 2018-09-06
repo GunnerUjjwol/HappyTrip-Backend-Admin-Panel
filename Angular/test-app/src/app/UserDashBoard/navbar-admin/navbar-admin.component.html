@@ -1,0 +1,9 @@
+<div class="topnav container-fluid">
+
+    <img src="../assets/images/logo.png"  alt="HAPPY TRIP">
+    <a [routerLink] = "['/logout']" >Logout</a>
+    <a [routerLink]="['/recentBookings']" (click) = "getBookingHistory()">Recent Bookings</a>
+    <a [routerLink]="['/addPackage']" (click) = "changePackageName()">Add Package</a>
+    <a [routerLink]="['/UserQueries']" (click) = "getUserHistory()">User Queries</a>
+    <a [routerLink] = "['/showPackages']" (click) = "getPackges()">Show Packages</a>
+</div>

@@ -1,0 +1,19 @@
+<div *ngIf = "UserQueries">
+    <label id = "queryLabel"><h2>User Queries:</h2></label><hr>
+  <table>
+    <tr>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Message</th>
+      <th></th>
+    </tr>
+    <tr *ngFor = "let user of UserQueries">
+      <th>{{user.userName}}</th>
+      <th>{{user.email}}</th>
+      <th>{{user.subject}}</th>
+      <th>{{user.message}}</th>
+      <th><button class = "btn btn-danger" (click) = "deleteQuery(user)">delete</button></th>
+    </tr>
+  </table>
+  </div>

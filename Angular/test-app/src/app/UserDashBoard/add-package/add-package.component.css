@@ -1,0 +1,19 @@
+.packageForm{
+    text-align: center;
+}
+input{
+    margin-top: 10px;
+}
+.submitButtonEM{
+    height: 30px;
+    width: 100px;
+
+    
+}
+label{
+    
+    padding: 2px;
+    display: inline-block;
+    
+    width: 160px;
+}

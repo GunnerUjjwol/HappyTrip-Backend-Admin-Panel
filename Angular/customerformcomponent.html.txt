@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>Customer Registration Form</h1>
+  <!-- stating the form -->
+  <form  name = "form" (ngSubmit)="onSubmit(customerForm)"  
+   #customerForm="ngForm"  novalidate>
+   
+    <div class="form-group" >
+      <label for="firstName">first Name</label>
+      <input type="text" [(ngModel)] = "model.firstName" #firstName="ngModel"  class="form-control" name="firstName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">last Name</label>
+        <input type="text" [(ngModel)] = "model.lastName" #lastName="ngModel" class="form-control" name="lastName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password"  [(ngModel)] = "model.password"  #password="ngModel" class="form-control" name="password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email"  [(ngModel)] = "model.email" #email="ngModel" class="form-control" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number"  [(ngModel)] = "model.age" #age="ngModel" class="form-control" name="age" required>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">gender</label>
+        <input type="text"  [(ngModel)] = "model.gender" #gender="ngModel" class="form-control" name="gender" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phoneNo">phone no</label>
+        <input type="tel"  [(ngModel)] = "model.phoneNo" #phoneNO="ngModel" class="form-control" name="phoneNo" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+</div>

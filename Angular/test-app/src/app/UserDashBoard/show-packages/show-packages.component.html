@@ -1,0 +1,29 @@
+<div *ngIf = "UserPackage">
+    <label id = "packageLabel"><h2>Packages:</h2></label><hr>
+  <table>
+    <tr>
+      <th>Package Id</th>
+      <th>Location</th>
+      <th>Image Location</th>
+      <th>Package Description</th>
+      <th>No of days</th>
+      <th>Price</th>
+      <th>Starting Date</th>
+      <th>Ending Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor = "let package of UserPackage">
+      <th>{{package.id}}</th>
+      <th>{{package.location}}</th>
+      <th>{{package.imagesLocation}}</th>
+      <th>{{package.packageDescription}}</th>
+      <th>{{package.days}}</th>
+      <th>{{package.price}}</th>
+      <th>{{package.startDate}}</th>
+      <th>{{package.endDate}}</th>
+      <th><button class = "btn btn-danger" (click) = "deletePackage(package)">delete</button></th>
+      <th><button [routerLink]="['/addPackage']" class = "btn btn-primary" (click) = "updatePackage(package)">update</button></th>
+    </tr>
+  </table>
+  </div>

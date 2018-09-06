@@ -1,0 +1,25 @@
+<div *ngIf = "HistoryList">
+    <label id = "bookingLabel"><h2>User Booking History</h2><hr></label>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Customer Name</th>
+            <th>Booked Date</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Booked Status</th>
+        <tr>
+        <tr *ngFor="let h of HistoryList">
+            <td>{{h.bookId}}</td>
+            <td>{{h.user}}</td>
+            <td>{{h.bookedDate}}</td>
+            <td>{{h.location}}</td>
+            <td>{{h.price}}</td>
+            <td>{{h.startDate}}</td>
+            <td>{{h.endDate}}</td>
+            <td>{{h.bookedstatus}}</td>
+        </tr>
+    </table>
+</div>
