@@ -12,7 +12,8 @@ export class GetHistoryComponent implements OnInit {
   constructor(private adminservice: AdminServiceService) { }
 
   ngOnInit() {
-    this.adminservice.currentdata.subscribe(HistoryList => this.HistoryList = HistoryList)
+    this.adminservice.currentdata.subscribe(HistoryList => this.HistoryList = HistoryList);
+
 
   }
 

@@ -52,8 +52,9 @@ public class BookingController {
 		bookingRepo.save(booking);
 	}
 	
-	@RequestMapping("/all")
+	@RequestMapping(value = "/all",method = RequestMethod.GET)
 	public List<Booking> showBookings() {
+		System.out.println("returning data!!!");
 		return (List<Booking>) bookingRepo.findAll();
 	}
 	
