@@ -7,13 +7,13 @@ import { AdminServiceService } from '../../admin-service.service';
   styleUrls: ['./get-history.component.css']
 })
 export class GetHistoryComponent implements OnInit {
-  HistoryList : any;
- 
-  constructor(private adminservice:AdminServiceService) { }
+  HistoryList: any;
+
+  constructor(private adminservice: AdminServiceService) { }
 
   ngOnInit() {
     this.adminservice.currentdata.subscribe(HistoryList => this.HistoryList = HistoryList)
-   
+
   }
 
 }

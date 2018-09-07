@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../admin-service.service';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
@@ -12,21 +12,20 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 
 export class ShowPackagesComponent implements OnInit {
-  
-  UserPackage:any;
-  
-  deletePackage(Formpackage){
-    this.adminservice.deletePackage(Formpackage).subscribe(()=>{
+
+  UserPackage: any;
+
+  deletePackage(Formpackage) {
+    this.adminservice.deletePackage(Formpackage).subscribe(() => {
       this.UserPackage.splice(this.UserPackage.indexOf(Formpackage.id), 1);
     })
   }
-  
-  updatePackage(packageUpdate:any)
-  {
+
+  updatePackage(packageUpdate: any) {
     this.adminservice.changelabel('Update');
-    this.adminservice.changeUpdate(packageUpdate);   
+    this.adminservice.changeUpdate(packageUpdate);
   }
-  constructor(private adminservice:AdminServiceService,private http:HttpClient) { }
+  constructor(private adminservice: AdminServiceService, private http: HttpClient) { }
   ngOnInit() {
     this.adminservice.currentUserpackages.subscribe(UserPackage => this.UserPackage = UserPackage)
   }
