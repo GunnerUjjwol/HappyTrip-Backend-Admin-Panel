@@ -1,5 +1,23 @@
 <div *ngIf = "HistoryList">
     <label id = "bookingLabel"><h2>User Booking History</h2><hr></label>
+    <div class="container">
+        <form class="form-horizontal" #f="ngForm" (ngSubmit)="filter(f)">
+        <div class="control-group">
+        <!-- 
+        {{f.value | json}} -->
+        <div class="controls form-inline" id="sandbox-container">
+        <label for="fromDate"><b>From Date</b></label>
+        <input type="date" name="fromDate" ngModel placeholder="dd/mm/yyyy"> &nbsp; &nbsp; 
+        <label for="toDate"><b>To Date</b></label>
+        <input type="date" name="toDate" ngModel placeholder="dd/mm/yyyy">
+        <label class="control-label"></label>
+        &nbsp;&nbsp;<button class="btn btn-danger" type="reset">Reset</button>&nbsp;&nbsp;
+        <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+        </div>
+        </form>
+        </div> 
+<br>
     <table>
         <tr>
             <th>ID</th>

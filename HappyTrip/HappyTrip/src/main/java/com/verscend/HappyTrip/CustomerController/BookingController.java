@@ -1,11 +1,14 @@
 package com.verscend.HappyTrip.CustomerController;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,8 +18,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.verscend.HappyTrip.Entity.Booking;
-import com.verscend.HappyTrip.Entity.PackageTrip;
-import com.verscend.HappyTrip.Entity.UserMessage;
 import com.verscend.HappyTrip.Entity.bookedStatus;
 import com.verscend.HappyTrip.Entity.Repository.BookingRepository;
 
@@ -57,6 +58,13 @@ public class BookingController {
 		System.out.println("returning data!!!");
 		return (List<Booking>) bookingRepo.findAll();
 	}
+	
+	@RequestMapping(value="filter/{fromDate}/{toDate}", method = RequestMethod.GET)
+	List<Map<String, Object>> dateBasedRecord(@PathVariable String fromDate, @PathVariable String toDate) {
+		List<Map<String, Object>> filtered = bookingRepo.dateBasedRecord(fromDate, toDate);
+		//System.out.println(filtered.toString());
+		return filtered;
+	} 
 	
 
 	@SuppressWarnings("deprecation")

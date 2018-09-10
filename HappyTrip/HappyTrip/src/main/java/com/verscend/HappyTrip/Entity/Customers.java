@@ -1,10 +1,16 @@
 package com.verscend.HappyTrip.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,6 +27,12 @@ public class Customers {
 		return id;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true
+	)
+	@JoinColumn(name = "cusId")
+	private List<Booking> bookings =  new ArrayList<>();
+	
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -50,6 +62,18 @@ public class Customers {
 
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "address")
+	private String address;
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	@Column(name = "password")
 	private String password;
@@ -62,22 +86,28 @@ public class Customers {
 
 	}
 
-	public Customers(String firstName, String lastName, int age, String phoneNo, String email, String password,
-			String gender) {
+	
+	public Customers(int id, String firstName, String lastName, int age, String gender, String phoneNo, String email,
+			String address, String password) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
+		this.gender = gender;
 		this.phoneNo = phoneNo;
 		this.email = email;
+		this.address = address;
 		this.password = password;
-		this.gender = gender;
 	}
+
+	
 
 	@Override
 	public String toString() {
-		return "Customers [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", gender=" + gender
-				+ ", phoneNo=" + phoneNo + ", email=" + email + ", password=" + password + "]";
+		return "Customers [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+				+ ", gender=" + gender + ", phoneNo=" + phoneNo + ", email=" + email + ", address=" + address
+				+ ", password=" + password + "]";
 	}
 
 	public void setFirstName(String firstName) {
@@ -123,5 +153,18 @@ public class Customers {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	// Seperated the getter and the setter for booking
+	// Getter returns all the list of bookings
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	// Setter sets the single booking in list
+	public void setBookings(Booking booking) {
+		bookings.add(booking);
+	}
+		 
+
 
 }

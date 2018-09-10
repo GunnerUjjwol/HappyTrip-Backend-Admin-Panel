@@ -14,7 +14,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.verscend.HappyTrip.Entity.Booking;
 import com.verscend.HappyTrip.Entity.Customers;
+import com.verscend.HappyTrip.Entity.bookedStatus;
 import com.verscend.HappyTrip.Entity.Repository.CustomersRepository;
 
 import java.util.ArrayList;
@@ -36,6 +38,13 @@ public class CustomerController {
 		return (List<Customers>) cusRep.findAll();
 	}
 	
+//	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
+//	public Customers getUser(@PathVariable int id) {
+//		System.out.println(cusRep.findById(id));
+//		return cusRep.findById(id);
+//	}	
+	
+	@RequestMapping(value="/user/{email}", method=RequestMethod.GET)
 	public Customers getUser(@PathVariable String email) {
 		System.out.println(cusRep.findByEmail(email));
 		return cusRep.findByEmail(email);
@@ -93,6 +102,49 @@ public class CustomerController {
 		return returnedData;
 	}
 
+	@RequestMapping(value = "/addBooking/{id}",method = RequestMethod.POST)
+	public void InsertBooking(@PathVariable int id,@RequestBody Booking booking)
+	{
+		
+		for(Customers c: cusRep.findAll()) {
+			if(c.getId() == id) {
+				c.setBookings(booking);
+				cusRep.save(c);
+				
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/getBooking/{id}")
+	public List<Booking> getBookings(@PathVariable int id){
+		for(Customers c:cusRep.findAll())
+		{
+			if(c.getId() == id)
+			{
+				System.out.println(c.getBookings());
+				return c.getBookings();
+			}
+		}
+		return null;
+	} 
+	
+	//for cancellation
+	@RequestMapping(value = "/cancel/{customerId}/{bookId}")
+	public void cancelbooking(@PathVariable int customerId,@PathVariable int bookId)
+	{
+		for(Customers c:cusRep.findAll())
+		{
+			if(c.getId() == customerId)
+			{
+				c.getBookings().get(bookId-1).setBookedstatus(bookedStatus.CANCELLED);
+				cusRep.save(c);
+			}
+		}
+		
+	} 
+	
+	
+	
 	@SuppressWarnings("deprecation")
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
