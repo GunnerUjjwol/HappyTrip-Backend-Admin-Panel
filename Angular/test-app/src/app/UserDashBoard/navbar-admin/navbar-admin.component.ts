@@ -16,7 +16,9 @@ export class NavbarAdminComponent implements OnInit {
   }
   getBookingHistory() {
     this.adminservice.getBookingHistory().subscribe((HistoryList) => {
+      console.log(HistoryList);
       this.adminservice.changeHistory(HistoryList);
+      
     });
   }
   getUserHistory() {

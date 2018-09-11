@@ -50,11 +50,19 @@ public class CustomerController {
 		return cusRep.findByEmail(email);
 	}	
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void insert(@RequestBody Customers customer) {
+	@RequestMapping(value = "/add/{email}", method = RequestMethod.POST)
+	public void insert(@PathVariable String email,@RequestBody Customers customer) {
 		// saving the data to the database
+		if(cusRep.findByEmail(email) == null)
+		{
+			cusRep.save(customer);
+		}
+		else
+		{
+			System.out.println("data already exists!!!");
+		}
 		System.out.println(customer.toString());
-		cusRep.save(customer);
+		
 
 	}
 

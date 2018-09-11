@@ -4,9 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import com.verscend.HappyTrip.Entity.Customers;
 public interface CustomersRepository extends CrudRepository<Customers,Integer>{
 
-Customers findByEmail(String email);
-
-Customers findById(int id);
+		Customers findByEmail(String email);
+		
+		Customers findById(int id);
+		
 
 
 }

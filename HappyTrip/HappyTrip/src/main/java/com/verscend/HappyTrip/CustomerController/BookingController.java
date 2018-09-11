@@ -45,8 +45,8 @@ public class BookingController {
 //		PackageTrip pckg= (PackageTrip)job.get("PackageTrip");
 		Booking booking = new Booking();
 	
-		booking.setLocation(jsonPckg.getString("location"));
-		booking.setPrice(jsonPckg.getString("price"));
+		booking.setLocation(jsonPckg.getString("LOCATION"));
+		booking.setPrice(jsonPckg.getString("PRICE"));
 		booking.setBookedstatus(bookedStatus.BOOKED);
 		booking.setUser(job.getString("user"));
 		System.out.println(booking.toString());
@@ -60,10 +60,9 @@ public class BookingController {
 	}
 	
 	@RequestMapping(value="filter/{fromDate}/{toDate}", method = RequestMethod.GET)
-	List<Map<String, Object>> dateBasedRecord(@PathVariable String fromDate, @PathVariable String toDate) {
+	List<Map<String,Object>> dateBasedRecord(@PathVariable String fromDate, @PathVariable String toDate) {
 		List<Map<String, Object>> filtered = bookingRepo.dateBasedRecord(fromDate, toDate);
-		//System.out.println(filtered.toString());
-		return filtered;
+		return filtered;		
 	} 
 	
 

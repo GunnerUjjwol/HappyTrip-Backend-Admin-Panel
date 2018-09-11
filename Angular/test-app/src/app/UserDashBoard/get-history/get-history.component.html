@@ -1,43 +1,91 @@
-<div *ngIf = "HistoryList">
-    <label id = "bookingLabel"><h2>User Booking History</h2><hr></label>
-    <div class="container">
-        <form class="form-horizontal" #f="ngForm" (ngSubmit)="filter(f)">
-        <div class="control-group">
-        <!-- 
-        {{f.value | json}} -->
-        <div class="controls form-inline" id="sandbox-container">
-        <label for="fromDate"><b>From Date</b></label>
-        <input type="date" name="fromDate" ngModel placeholder="dd/mm/yyyy"> &nbsp; &nbsp; 
-        <label for="toDate"><b>To Date</b></label>
-        <input type="date" name="toDate" ngModel placeholder="dd/mm/yyyy">
-        <label class="control-label"></label>
-        &nbsp;&nbsp;<button class="btn btn-danger" type="reset">Reset</button>&nbsp;&nbsp;
-        <button class="btn btn-success" type="submit">Submit</button>
-        </div>
-        </div>
-        </form>
-        </div> 
-<br>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Customer Name</th>
-            <th>Booked Date</th>
-            <th>Location</th>
-            <th>Price</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Booked Status</th>
-        <tr>
-        <tr *ngFor="let h of HistoryList">
-            <td>{{h.bookId}}</td>
-            <td>{{h.user}}</td>
-            <td>{{h.bookedDate}}</td>
-            <td>{{h.location}}</td>
-            <td>{{h.price}}</td>
-            <td>{{h.startDate}}</td>
-            <td>{{h.endDate}}</td>
-            <td>{{h.bookedstatus}}</td>
-        </tr>
-    </table>
+<label id = "bookingLabel"><h2>User Booking History</h2><hr></label>
+<div class="container">
+    <form class="form-horizontal" #f="ngForm" (ngSubmit)="filter(f)">
+    <div class="control-group">
+    <!-- 
+    {{f.value | json}} -->
+    <div class="controls form-inline" id="sandbox-container">
+    <label for="fromDate"><b>From Date</b></label>
+    <input type="date" name="fromDate" ngModel placeholder="dd/mm/yyyy"> &nbsp; &nbsp; <label for="toDate"><b>To Date</b></label>
+    <input type="date" name="toDate" ngModel placeholder="dd/mm/yyyy">
+    <label class="control-label"></label>
+    &nbsp;&nbsp;<button class="btn btn-danger" type="reset" (click) = "reset()">Reset</button>&nbsp;&nbsp;
+    <button class="btn btn-success" type="submit">Submit</button>
+    </div>
+    </div>
+    </form>
+    </div> 
+
+
+<div *ngIf = "FilteredList">
+<h2>Filtered bookings</h2>
+<table>
+<tr>
+<th>ID</th>
+<th>Customer Name</th>
+<th>Booked Date</th>
+<th>Location</th>
+<th>Price</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Booked Status</th>
+<tr>
+<tr *ngFor="let h of FilteredList">
+<td>{{h.BOOK_ID}}</td>
+<td>{{h.USER}}</td>
+<td>{{h.BOOKED_DATE}}</td>
+<td>{{h.LOCATION}}</td>
+<td>{{h.PRICE}}</td>
+<td>{{h.START_DATE}}</td>
+<td>{{h.END_DATE}}</td>
+<td>{{h.BOOKEDSTATUS}}</td>
+</tr>
+</table>
+</div> 
+ 
+
+<div *ngIf="HistoryList">
+<h2>All bookings</h2>
+<label id="bookingLabel">
+
+<hr>
+</label>
+<table>
+<tr>
+<th>firstName</th>
+<th>lastName</th>
+<th>location</th>
+<th>booked date</th>
+<th>package</th>
+<th>price</th>
+</tr>
+<tr *ngFor="let cus of HistoryList;let i = index">
+<td>{{cus.firstName}}</td>
+<td>{{cus.lastName}}</td>
+<td>
+<div *ngFor="let book of HistoryList[i].bookings">
+{{book.location}}
 </div>
+</td>
+<td>
+<div *ngFor="let book of HistoryList[i].bookings">
+{{book.bookedDate}}
+</div>
+</td>
+<td>
+<div *ngFor="let book of HistoryList[i].bookings">
+{{book.package}}
+</div>
+</td>
+
+<td>
+<div *ngFor="let book of HistoryList[i].bookings">
+{{book.price}}
+</div>
+</td>
+</tr>
+</table>
+</div> 
+ 
+
+ 

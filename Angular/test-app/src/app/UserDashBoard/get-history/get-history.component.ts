@@ -9,25 +9,24 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetHistoryComponent implements OnInit {
   HistoryList: any;
-
+  FilteredList :any;
   constructor(private adminservice: AdminServiceService, private http:HttpClient) { }
 
   ngOnInit() {
     this.adminservice.currentdata.subscribe(HistoryList => this.HistoryList = HistoryList);
-
-
   }
-
+  reset(){
+    this.FilteredList = null;
+  }
   filter(f)
-{
-console.log(f.value.fromDate);
-this.http.get("http://localhost:8090/Booking/filter/"+ f.value.fromDate+"/"+f.value.toDate)
-.subscribe(
-(res) =>{ 
-  //console.log(res);
-this.HistoryList=res;
-console.log(this.HistoryList);}
-)
-} 
+  {
+    // this.HistoryList = null;
+    this.adminservice.getFilteredList(f).subscribe((res) =>{ 
+        //console.log(res);
+        this.FilteredList=res;
+        console.log(this.FilteredList);
+      }
+    )
+  } 
 
 }

@@ -60,7 +60,7 @@ public class Customers {
 	@Column(name = "phoneNo")
 	private String phoneNo;
 
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
 	private String email;
 	
 	@Column(name = "address")

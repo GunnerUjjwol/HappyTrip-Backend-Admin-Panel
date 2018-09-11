@@ -13,16 +13,21 @@ export class AdminServiceService {
 addPackage(packageForm): Observable<any>{
   return  this.http.post(this.url+"Package/add",packageForm.value);
 }
-updatePackage(packageForm):Observable<any>{
-  return this.http.put(this.url+"Package/update",packageForm.value)
+updatePackage(packageForm): Observable<any>{
+  return this.http.put(this.url+"Package/update",packageForm.value);
 }
 
 //returns the booking history
 getBookingHistory(): Observable<any>{
   console.log("sendingdata");
-  return this.http.get(this.url+"Booking/all");
+  return this.http.get(this.url+"Customers/all");
 }
+//This returned the filtered booking list acc
+// to the start and end date
 
+getFilteredList(formData) : Observable<any>{
+  return this.http.get(this.url+"Booking/filter/"+ formData.value.fromDate+"/"+formData.value.toDate);
+}
 //returns the user queries
 getUserHistory(): Observable<any>{
   
@@ -74,7 +79,8 @@ deleteQueries(userQuery) :Observable<any>{
   private updateData = new BehaviorSubject<any>('');
   currentupdateData =  this.updateData.asObservable();
 
-  //functions for changing the observable data
+  //function for the changing the data
+
   changeHistory(History:any){
     this.HistoryList.next(History);
     
