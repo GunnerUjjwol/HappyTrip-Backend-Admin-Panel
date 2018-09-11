@@ -22,6 +22,7 @@ import com.verscend.HappyTrip.Entity.Repository.CustomersRepository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.validation.constraints.Email;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -37,33 +38,27 @@ public class CustomerController {
 	public List<Customers> getAll() {
 		return (List<Customers>) cusRep.findAll();
 	}
-	
+
 //	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
 //	public Customers getUser(@PathVariable int id) {
 //		System.out.println(cusRep.findById(id));
 //		return cusRep.findById(id);
 //	}	
-	
-	@RequestMapping(value="/user/{email}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
 	public Customers getUser(@PathVariable String email) {
+
 		System.out.println(cusRep.findByEmail(email));
 		return cusRep.findByEmail(email);
-	}	
+	}
 
 	@RequestMapping(value = "/add/{email}", method = RequestMethod.POST)
-	public void insert(@PathVariable String email,@RequestBody Customers customer) {
-		// saving the data to the database
-		if(cusRep.findByEmail(email) == null)
-		{
+	public void insert(@PathVariable String email, @RequestBody Customers customer) {
+		if (cusRep.findByEmail(customer.getEmail().trim()) != null) {
+			System.out.println("not saving");
+		} else {
 			cusRep.save(customer);
 		}
-		else
-		{
-			System.out.println("data already exists!!!");
-		}
-		System.out.println(customer.toString());
-		
-
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.PUT)
@@ -110,49 +105,41 @@ public class CustomerController {
 		return returnedData;
 	}
 
-	@RequestMapping(value = "/addBooking/{id}",method = RequestMethod.POST)
-	public void InsertBooking(@PathVariable int id,@RequestBody Booking booking)
-	{
-		
-		for(Customers c: cusRep.findAll()) {
-			if(c.getId() == id) {
+	@RequestMapping(value = "/addBooking/{id}", method = RequestMethod.POST)
+	public void InsertBooking(@PathVariable int id, @RequestBody Booking booking) {
+
+		for (Customers c : cusRep.findAll()) {
+			if (c.getId() == id) {
 				c.setBookings(booking);
 				cusRep.save(c);
-				
+
 			}
 		}
 	}
-	
+
 	@RequestMapping(value = "/getBooking/{id}")
-	public List<Booking> getBookings(@PathVariable int id){
-		for(Customers c:cusRep.findAll())
-		{
-			if(c.getId() == id)
-			{
+	public List<Booking> getBookings(@PathVariable int id) {
+		for (Customers c : cusRep.findAll()) {
+			if (c.getId() == id) {
 				System.out.println(c.getBookings());
 				return c.getBookings();
 			}
 		}
 		return null;
-	} 
-	
-	//for cancellation
+	}
+
+	// for cancellation
 	@RequestMapping(value = "/cancel/{customerId}/{bookId}")
-	public void cancelbooking(@PathVariable int customerId,@PathVariable int bookId)
-	{
-		for(Customers c:cusRep.findAll())
-		{
-			if(c.getId() == customerId)
-			{
-				c.getBookings().get(bookId-1).setBookedstatus(bookedStatus.CANCELLED);
+	public void cancelbooking(@PathVariable int customerId, @PathVariable int bookId) {
+		for (Customers c : cusRep.findAll()) {
+			if (c.getId() == customerId) {
+				c.getBookings().get(bookId - 1).setBookedstatus(bookedStatus.CANCELLED);
 				cusRep.save(c);
 			}
 		}
-		
-	} 
-	
-	
-	
+
+	}
+
 	@SuppressWarnings("deprecation")
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
