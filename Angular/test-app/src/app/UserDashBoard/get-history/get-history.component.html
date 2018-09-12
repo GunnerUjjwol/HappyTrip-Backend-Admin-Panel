@@ -27,7 +27,6 @@
 <th>Location</th>
 <th>Price</th>
 <th>Start Date</th>
-<th>End Date</th>
 <th>Booked Status</th>
 <tr>
 <tr *ngFor="let h of FilteredList">
@@ -37,7 +36,6 @@
 <td>{{h.LOCATION}}</td>
 <td>{{h.PRICE}}</td>
 <td>{{h.START_DATE}}</td>
-<td>{{h.END_DATE}}</td>
 <td>{{h.BOOKEDSTATUS}}</td>
 </tr>
 </table>
@@ -56,7 +54,6 @@
 <th>lastName</th>
 <th>location</th>
 <th>booked date</th>
-<th>package</th>
 <th>price</th>
 </tr>
 <tr *ngFor="let cus of HistoryList;let i = index">
@@ -70,11 +67,6 @@
 <td>
 <div *ngFor="let book of HistoryList[i].bookings">
 {{book.bookedDate}}
-</div>
-</td>
-<td>
-<div *ngFor="let book of HistoryList[i].bookings">
-{{book.package}}
 </div>
 </td>
 

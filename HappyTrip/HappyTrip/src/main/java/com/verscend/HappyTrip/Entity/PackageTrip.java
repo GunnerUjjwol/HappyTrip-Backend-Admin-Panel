@@ -22,14 +22,13 @@ public class PackageTrip {
 	@SequenceGenerator(name="SEQUENCE1", sequenceName="SEQUENCE1", allocationSize=1)
 	@Column(name = "id")
 	private int id;
-	@Column(name = "packageName")
-	private String packageName;
+	
 
 	@Override
 	public String toString() {
-		return "PackageTrip [id=" + id + ", packageName=" + packageName + ", packageDesc=" + packageDesc
+		return "PackageTrip [id=" + id + ", packageDesc=" + packageDesc
 				+ ", imagesLocation=" + imagesLocation + ", location=" + location + ", days=" + days + ", price="
-				+ price + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ price + ", startDate=" + "]";
 	}
 
 	@Lob
@@ -39,13 +38,7 @@ public class PackageTrip {
 	@Column(name = "imagesLocation")
 	private String imagesLocation;
 
-	public String getPackageName() {
-		return packageName;
-	}
 
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
 
 	@Column(name = "location")
 	private String location;
@@ -56,13 +49,6 @@ public class PackageTrip {
 	@Column(name = "price")
 	private String price;
 
-	@Column(name = "startDate")
-	@Temporal(TemporalType.DATE)
-	private Date startDate;
-
-	@Column(name = "endDate")
-	@Temporal(TemporalType.DATE)
-	private Date endDate;
 
 	public PackageTrip() {
 
@@ -77,9 +63,6 @@ public class PackageTrip {
 		this.location = location;
 		this.days = days;
 		this.price = price;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.packageName = packageName;
 	}
 
 	public int getId() {
@@ -130,20 +113,6 @@ public class PackageTrip {
 		this.price = price;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+	
 
 }

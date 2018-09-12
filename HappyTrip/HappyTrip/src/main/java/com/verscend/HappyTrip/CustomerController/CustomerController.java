@@ -53,12 +53,16 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/add/{email}", method = RequestMethod.POST)
-	public void insert(@PathVariable String email, @RequestBody Customers customer) {
-		if (cusRep.findByEmail(customer.getEmail().trim()) != null) {
+	public HashMap<String, String> insert(@PathVariable String email, @RequestBody Customers customer) {
+		HashMap<String,String> result = new HashMap<>();
+ 		if (cusRep.findByEmail(customer.getEmail().trim()) != null) {
+ 			result.put("register","no");
 			System.out.println("not saving");
 		} else {
 			cusRep.save(customer);
+			result.put("register","yes");
 		}
+		return result;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.PUT)

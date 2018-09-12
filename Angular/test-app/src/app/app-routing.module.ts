@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerFormComponent } from './customer-form/customer-form.component';
+
 import { AppComponent } from './app.component';
 import { GetHistoryComponent } from './UserDashBoard/get-history/get-history.component';
 import { AddPackageComponent } from './UserDashBoard/add-package/add-package.component';
@@ -9,7 +9,6 @@ import { ShowPackagesComponent } from './UserDashBoard/show-packages/show-packag
 import { AdminBodyComponent } from './UserDashBoard/admin-body/admin-body.component';
 
 const routes: Routes = [
-  { path: 'customer', component: CustomerFormComponent },
   { path: 'recentBookings', component: GetHistoryComponent },
   { path: 'addPackage', component: AddPackageComponent },
   { path: 'UserQueries', component: UserQueriesComponent },

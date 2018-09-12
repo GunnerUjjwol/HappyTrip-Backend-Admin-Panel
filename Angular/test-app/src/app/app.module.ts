@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import{HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import{FormsModule} from '@angular/forms';
-import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { NavbarAdminComponent } from './UserDashBoard/navbar-admin/navbar-admin.component';
 import { GetHistoryComponent } from './UserDashBoard/get-history/get-history.component';
@@ -17,9 +16,7 @@ import { AdminBodyComponent } from './UserDashBoard/admin-body/admin-body.compon
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CustomerFormComponent,
-    
+    AppComponent,    
     NavbarAdminComponent,
     GetHistoryComponent,
     AddPackageComponent,

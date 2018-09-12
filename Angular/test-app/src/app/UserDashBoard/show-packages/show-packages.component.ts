@@ -14,11 +14,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ShowPackagesComponent implements OnInit {
 
   UserPackage: any;
+  check:boolean;
 
   deletePackage(Formpackage) {
+    this.check=(confirm("Are you sure you want to delete the package?"));
+    if(this.check===true){
     this.adminservice.deletePackage(Formpackage).subscribe(() => {
       this.UserPackage.splice(this.UserPackage.indexOf(Formpackage.id), 1);
-    })
+    });
+  }
   }
 
   updatePackage(packageUpdate: any) {

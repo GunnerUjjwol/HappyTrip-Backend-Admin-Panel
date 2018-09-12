@@ -42,9 +42,7 @@ public class Booking {
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
 
-	@Column(name = "endDate")
-	@Temporal(TemporalType.DATE)
-	private Date endDate;
+	
 
 	@Column(name = "bookedstatus")
 	@Enumerated(EnumType.STRING)
@@ -65,7 +63,6 @@ public class Booking {
 		this.location = location;
 		this.price = price;
 		this.startDate = startDate;
-		this.endDate = endDate;
 		this.bookedstatus = bookedstatus;
 	}
 
@@ -119,13 +116,7 @@ public class Booking {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+	
 
 	public bookedStatus getBookedstatus() {
 		return bookedstatus;
@@ -140,7 +131,7 @@ public class Booking {
 	@Override
 	public String toString() {
 		return "Booking [bookId=" + bookId + ", user=" + user + ", bookedDate=" + bookedDate + ", location=" + location
-				+ ", price=" + price + ", startDate=" + startDate + ", endDate=" + endDate + ", bookedstatus="
+				+ ", price=" + price + ", startDate=" + startDate + ",  bookedstatus="
 				+ bookedstatus + "]";
 	}
 

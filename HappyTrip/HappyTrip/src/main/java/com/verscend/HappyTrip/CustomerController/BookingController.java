@@ -45,8 +45,8 @@ public class BookingController {
 //		PackageTrip pckg= (PackageTrip)job.get("PackageTrip");
 		Booking booking = new Booking();
 	
-		booking.setLocation(jsonPckg.getString("LOCATION"));
-		booking.setPrice(jsonPckg.getString("PRICE"));
+		booking.setLocation(jsonPckg.getString("location"));
+		booking.setPrice(jsonPckg.getString("price"));
 		booking.setBookedstatus(bookedStatus.BOOKED);
 		booking.setUser(job.getString("user"));
 		System.out.println(booking.toString());

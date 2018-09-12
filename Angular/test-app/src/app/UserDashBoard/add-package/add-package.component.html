@@ -1,4 +1,4 @@
-<div class="packageForm">
+<div class="container">
   <h2>{{Create_Update}} Package
     <hr>
   </h2>
@@ -8,29 +8,23 @@
   <form (ngSubmit)="createPackage(packageForm);packageForm.reset()" #packageForm="ngForm">
     <input type="hidden" [(ngModel)]="model.id" name="id">
 
-    <label>Package name</label> <input required #packagename="ngModel" [(ngModel)]="model.packageName" type="text" name="packageName"><br>
-    <div *ngIf="packagename.invalid && (packagename.dirty || packagename.touched)" class="alert alert-danger">name is required</div>
-
-    <label>Image Location</label> <input required #imagelocation="ngModel" [(ngModel)]="model.imagesLocation" type="text"
-      name="imagesLocation"><br>
-    <div *ngIf="imagelocation.invalid && (imagelocation.dirty || imagelocation.touched)" class="alert alert-danger">image
-      location is required</div>
-
+    
     <label>Location</label> <input required #Loaction="ngModel" [(ngModel)]="model.location" type="text" name="location"><br>
     <div *ngIf="Loaction.invalid && (Loaction.dirty || Loaction.touched)" class="alert alert-danger">location is required</div>
 
-    <label>No of Days</label> <input required #Days="ngModel" [(ngModel)]="model.days" type="number" name="days"><br>
+    
+   <label>Image Location</label> <input required #imagelocation="ngModel" [(ngModel)]="model.imagesLocation" type="text"
+      name="imagesLocation"><br>
+    <div *ngIf="imagelocation.invalid && (imagelocation.dirty || imagelocation.touched)" class="alert alert-danger">image
+      location is required</div>
+    
+      <label>No of Days</label> <input required #Days="ngModel" [(ngModel)]="model.days" type="number" name="days"><br>
     <div *ngIf="Days.invalid && (Days.dirty || Days.touched)" class="alert alert-danger">no of days is required</div>
 
     <label>Price</label> <input required #Price="ngModel" [(ngModel)]="model.price" type="number" name="price"><br>
     <div *ngIf="Price.invalid && (Price.dirty || Price.touched)" class="alert alert-danger">price is required</div>
 
-    <label>Starting Date</label> <input required #startdate="ngModel" [(ngModel)]="model.startDate" type="date" name="startDate"><br>
-    <div *ngIf="startdate.invalid && (startdate.dirty || startdate.touched)" class="alert alert-danger">start date is required</div>
-
-    <label>Ending Date</label> <input required #enddate="ngModel" [(ngModel)]="model.endDate" type="date" name="endDate"><br><br>
-    <div *ngIf="enddate.invalid && (enddate.dirty || enddate.touched)" class="alert alert-danger">endt date is required</div>
-
+    
     <label>Package Description</label><br>
     <textarea rows="4" cols="50" required #packagedescription="ngModel" [(ngModel)]="model.packageDescription" type="text" name="packageDescription"></textarea><br>
     <div *ngIf="packagedescription.invalid && (packagedescription.dirty || packagedescription.touched)" class="alert alert-danger">description
