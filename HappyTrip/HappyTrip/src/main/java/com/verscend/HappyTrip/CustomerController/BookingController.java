@@ -1,8 +1,13 @@
 package com.verscend.HappyTrip.CustomerController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,8 +52,18 @@ public class BookingController {
 	
 		booking.setLocation(jsonPckg.getString("location"));
 		booking.setPrice(jsonPckg.getString("price"));
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date date= sdf.parse(job.getString("startDate"));
+			System.out.println(date);
+			booking.setStartDate(date);
+		} catch (JSONException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		booking.setBookedstatus(bookedStatus.BOOKED);
 		booking.setUser(job.getString("user"));
+		
 		System.out.println(booking.toString());
 		bookingRepo.save(booking);
 	}

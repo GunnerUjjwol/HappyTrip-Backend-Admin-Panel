@@ -65,7 +65,7 @@ public class CustomerController {
 		return result;
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public void update(@RequestBody Customers customer) {
 		cusRep.save(customer);
 		System.out.println("data updated!!!");
