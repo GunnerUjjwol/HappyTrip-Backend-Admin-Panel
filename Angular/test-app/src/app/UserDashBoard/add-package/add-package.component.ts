@@ -8,7 +8,7 @@ import { AdminServiceService } from '../../admin-service.service';
   styleUrls: ['./add-package.component.css']
 })
 export class AddPackageComponent implements OnInit {
-  Create_Update = "Create";
+  Create_Update = "";
   model: any;
   hide: boolean = false;
 
@@ -27,6 +27,7 @@ export class AddPackageComponent implements OnInit {
   constructor(private http: HttpClient, private adminservice: AdminServiceService) { }
 
   ngOnInit() {
+    this.Create_Update= "Create";
     this.adminservice.currentpackageLabel.subscribe(packageName => this.Create_Update = packageName);
     this.adminservice.currentupdateData.subscribe(modelUpdate => this.model = modelUpdate);
     this.adminservice.currentSuccess.subscribe(changeSuccess => this.hide = changeSuccess);

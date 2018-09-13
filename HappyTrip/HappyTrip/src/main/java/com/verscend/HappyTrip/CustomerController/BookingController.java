@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.verscend.HappyTrip.Entity.Booking;
+import com.verscend.HappyTrip.Entity.Customers;
 import com.verscend.HappyTrip.Entity.bookedStatus;
 import com.verscend.HappyTrip.Entity.Repository.BookingRepository;
 
@@ -72,6 +73,17 @@ public class BookingController {
 	public List<Booking> showBookings() {
 		System.out.println("returning data!!!");
 		return (List<Booking>) bookingRepo.findAll();
+	}
+	
+	
+	@RequestMapping(value = "/cancel/{bookId}", method=RequestMethod.GET)
+	public void cancelbooking( @PathVariable int bookId) {
+		
+		Booking b= bookingRepo.findByBookId(bookId);
+		System.out.println(b);
+		b.setBookedstatus(bookedStatus.CANCELLED);
+		System.out.println(b.getBookedstatus());
+		bookingRepo.save(b);
 	}
 	
 	@RequestMapping(value="filter/{fromDate}/{toDate}", method = RequestMethod.GET)

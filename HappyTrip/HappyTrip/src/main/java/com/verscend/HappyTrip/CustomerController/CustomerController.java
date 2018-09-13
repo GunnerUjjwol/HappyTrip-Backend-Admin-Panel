@@ -123,26 +123,34 @@ public class CustomerController {
 
 	@RequestMapping(value = "/getBooking/{id}")
 	public List<Booking> getBookings(@PathVariable int id) {
-		for (Customers c : cusRep.findAll()) {
-			if (c.getId() == id) {
-				System.out.println(c.getBookings());
-				return c.getBookings();
-			}
-		}
-		return null;
+		Customers c= cusRep.findById(id); 
+		return c.getBookings();
+//		for (Customers c : cusRep.findAll()) {
+//			if (c.getId() == id) {
+//				System.out.println(c.getBookings());
+//				return c.getBookings();
+//			}
+//		}
+//		return null;
 	}
 
 	// for cancellation
-	@RequestMapping(value = "/cancel/{customerId}/{bookId}")
-	public void cancelbooking(@PathVariable int customerId, @PathVariable int bookId) {
-		for (Customers c : cusRep.findAll()) {
-			if (c.getId() == customerId) {
-				c.getBookings().get(bookId - 1).setBookedstatus(bookedStatus.CANCELLED);
-				cusRep.save(c);
-			}
-		}
-
-	}
+//	@RequestMapping(value = "/cancel/{customerId}/{bookId}", method=RequestMethod.GET)
+//	public void cancelbooking(@PathVariable int customerId, @PathVariable int bookId) {
+//		
+//		Customers c= cusRep.findById(customerId);
+//		c.getBookings().get(bookId - 1).setBookedstatus(bookedStatus.CANCELLED);
+//		
+//		
+////		for (Customers c : cusRep.findAll()) {
+////			if (c.getId() == customerId) {
+////				c.getBookings().get(bookId - 1).setBookedstatus(bookedStatus.CANCELLED);
+////				cusRep.save(c);
+////			}
+////		}
+////		System.out.println("Reaching controller, but not executing for loop");
+//
+//	}
 
 	@SuppressWarnings("deprecation")
 	@Bean

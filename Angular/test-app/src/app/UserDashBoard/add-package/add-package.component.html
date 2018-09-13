@@ -1,36 +1,64 @@
-<div class="container">
-  <h2>{{Create_Update}} Package
-    <hr>
-  </h2>
-  <h3 *ngIf="hide">
-    <div class="alert alert-success">{{Create_Update}}d Package!!!</div>
-  </h3>
-  <form (ngSubmit)="createPackage(packageForm);packageForm.reset()" #packageForm="ngForm">
-    <input type="hidden" [(ngModel)]="model.id" name="id">
+<div class="content py-5  bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <span class="anchor" id="formUserEdit"></span>
+        <!-- form user info -->
+        <div class="card card-outline-secondary">
+          <div class="card-header">
+            <h2 class="mb-0">{{Create_Update}} Package
+              <hr>
+            </h2>
+          </div>
+          <h3 *ngIf="hide">
 
-    
-    <label>Location</label> <input required #Loaction="ngModel" [(ngModel)]="model.location" type="text" name="location"><br>
-    <div *ngIf="Loaction.invalid && (Loaction.dirty || Loaction.touched)" class="alert alert-danger">location is required</div>
 
-    
-   <label>Image Location</label> <input required #imagelocation="ngModel" [(ngModel)]="model.imagesLocation" type="text"
-      name="imagesLocation"><br>
-    <div *ngIf="imagelocation.invalid && (imagelocation.dirty || imagelocation.touched)" class="alert alert-danger">image
-      location is required</div>
-    
-      <label>No of Days</label> <input required #Days="ngModel" [(ngModel)]="model.days" type="number" name="days"><br>
-    <div *ngIf="Days.invalid && (Days.dirty || Days.touched)" class="alert alert-danger">no of days is required</div>
+            <div class="alert alert-success">{{Create_Update}}d Package!!!</div>
+          </h3>
+          <div class="card-body">
+            <form class="form" (ngSubmit)="createPackage(packageForm);packageForm.reset()" #packageForm="ngForm">
+              <input type="hidden" [(ngModel)]="model.id" name="id">
 
-    <label>Price</label> <input required #Price="ngModel" [(ngModel)]="model.price" type="number" name="price"><br>
-    <div *ngIf="Price.invalid && (Price.dirty || Price.touched)" class="alert alert-danger">price is required</div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Location</label> <input required #Loaction="ngModel"
+                  [(ngModel)]="model.location" type="text" name="location"><br>
+                <div *ngIf="Loaction.invalid && (Loaction.dirty || Loaction.touched)" class="alert alert-danger">location
+                  is required
+                </div>
+              </div>
 
-    
-    <label>Package Description</label><br>
-    <textarea rows="4" cols="50" required #packagedescription="ngModel" [(ngModel)]="model.packageDescription" type="text" name="packageDescription"></textarea><br>
-    <div *ngIf="packagedescription.invalid && (packagedescription.dirty || packagedescription.touched)" class="alert alert-danger">description
-      is required</div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Image Location</label> <input required #imagelocation="ngModel"
+                  [(ngModel)]="model.imagesLocation" type="text" name="imagesLocation"><br>
+                <div *ngIf="imagelocation.invalid && (imagelocation.dirty || imagelocation.touched)" class="alert alert-danger">image
+                  location is required</div>
+              </div>
 
-    <input class="submitButtonEM" type="submit" value={{Create_Update}} [disabled]="packageForm.invalid">
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">No of Days</label> <input required #Days="ngModel"
+                  [(ngModel)]="model.days" type="number" name="days"><br>
+                <div *ngIf="Days.invalid && (Days.dirty || Days.touched)" class="alert alert-danger">no of days is required</div>
+              </div>
 
-  </form>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Price</label> <input required #Price="ngModel"
+                  [(ngModel)]="model.price" type="number" name="price"><br>
+                <div *ngIf="Price.invalid && (Price.dirty || Price.touched)" class="alert alert-danger">price is required</div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Package Description</label><br>
+                <textarea rows="4" cols="50" required #packagedescription="ngModel" [(ngModel)]="model.packageDescription" type="text" name="packageDescription"></textarea><br>
+                <div *ngIf="packagedescription.invalid && (packagedescription.dirty || packagedescription.touched)" class="alert alert-danger">description
+                  is required</div>
+              </div>
+
+              <input class="submitButtonEM" class="btn btn-success" type="submit" value={{Create_Update}} [disabled]="packageForm.invalid">
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

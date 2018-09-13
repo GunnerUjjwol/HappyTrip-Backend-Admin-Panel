@@ -13,6 +13,8 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 	
 		@Query(value = "select * from booking where booked_date between ?1 and ?2", nativeQuery = true)
 			List<Map<String, Object>> dateBasedRecord(String fromDate, String toDate); 
+		
+		Booking findByBookId(int id);
 		 
 
 
