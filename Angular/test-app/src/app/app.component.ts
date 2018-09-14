@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'Admin Panel- Happy Trip';
   response :any;
+  loginToken: string = null;
+
   constructor(private http : HttpClient){
   }
   getJson(){
@@ -18,7 +20,7 @@ export class AppComponent {
       this.response = response;
     });
   }
-  ngOnInit(){
+  ngOnInit():void{
    
   }
 }

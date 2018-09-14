@@ -48,8 +48,14 @@ public class CustomerController {
 	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
 	public Customers getUser(@PathVariable String email) {
 
-		System.out.println(cusRep.findByEmail(email));
-		return cusRep.findByEmail(email);
+		for(Booking b :  new ArrayList<>(cusRep.findByEmail(email).getBookings()))
+		{
+			if(b.getBookedstatus() == bookedStatus.CANCELLED)
+			{
+				cusRep.findByEmail(email).getBookings().remove(b);
+			}
+		}
+		return(cusRep.findByEmail(email));
 	}
 
 	@RequestMapping(value = "/add/{email}", method = RequestMethod.POST)
@@ -151,6 +157,21 @@ public class CustomerController {
 ////		System.out.println("Reaching controller, but not executing for loop");
 //
 //	}
+	
+	
+	//getting the price of the booked packages 
+	@RequestMapping(value = "/getPrice/{email}",method = RequestMethod.GET)
+	public int getPrice(@PathVariable String email) {
+		int price = 0;
+		for(Booking b: cusRep.findByEmail(email).getBookings())
+		{
+			if(b.getBookedstatus()== bookedStatus.BOOKED) {
+					price += Integer.parseInt(b.getPrice());
+				
+			}
+		}
+		return price;
+	}	
 
 	@SuppressWarnings("deprecation")
 	@Bean
