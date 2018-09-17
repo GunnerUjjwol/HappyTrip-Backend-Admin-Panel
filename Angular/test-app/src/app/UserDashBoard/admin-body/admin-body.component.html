@@ -9,9 +9,11 @@
       <div class="form-group">
             <div class="input-group required">
       <label for="inputEmail" class="input-group-addon glyphicon glyphicon-user" ></label>
+
       <input type="email" id="inputEmail" class="form-control" [(ngModel)]="email" 
       pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" #e_mail="ngModel" name="email" placeholder="Email address" required autofocus>
-      </div>
+     
+    </div>
       <div class="alert alert-danger" *ngIf="e_mail.touched && !e_mail.valid">
             <div *ngIf="e_mail.errors.required">
                 Email id is required</div>

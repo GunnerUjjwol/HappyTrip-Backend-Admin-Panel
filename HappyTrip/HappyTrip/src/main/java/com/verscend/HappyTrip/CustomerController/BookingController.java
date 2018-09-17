@@ -1,5 +1,6 @@
 package com.verscend.HappyTrip.CustomerController;
 
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ import com.verscend.HappyTrip.Entity.Booking;
 import com.verscend.HappyTrip.Entity.Customers;
 import com.verscend.HappyTrip.Entity.bookedStatus;
 import com.verscend.HappyTrip.Entity.Repository.BookingRepository;
+import com.verscend.HappyTrip.Entity.Repository.CustomersRepository;
 
 @RestController
 @RequestMapping("/Booking")
@@ -33,12 +35,19 @@ import com.verscend.HappyTrip.Entity.Repository.BookingRepository;
 public class BookingController {
 	
 	
-	
+	@Autowired
+	private CustomersRepository cusRep;
 	@Autowired
 	BookingRepository bookingRepo;
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
-	public void addBooking(@RequestBody String jsonString) {
+	public void addBooking(@RequestBody String jsonString,Principal principal) {
 		System.out.println(jsonString);
+		String email = principal.getName();
+		Customers customer = cusRep.findByEmail(email);
+		
+		
+		
+		
 		JSONObject job = new JSONObject(jsonString);
 		
 		
@@ -64,10 +73,13 @@ public class BookingController {
 		}
 		booking.setBookedstatus(bookedStatus.BOOKED);
 		booking.setUser(job.getString("user"));
-		
+		customer.setBookings(booking);
+		cusRep.save(customer);
 		System.out.println(booking.toString());
-		bookingRepo.save(booking);
+		
 	}
+
+	
 	
 	@RequestMapping(value = "/all",method = RequestMethod.GET)
 	public List<Booking> showBookings() {

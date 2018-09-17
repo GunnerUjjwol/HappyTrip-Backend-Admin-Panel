@@ -7,12 +7,15 @@ import { AddPackageComponent } from './UserDashBoard/add-package/add-package.com
 import { UserQueriesComponent } from './UserDashBoard/user-queries/user-queries.component';
 import { ShowPackagesComponent } from './UserDashBoard/show-packages/show-packages.component';
 import { AdminBodyComponent } from './UserDashBoard/admin-body/admin-body.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
   { path: 'recentBookings', component: GetHistoryComponent },
   { path: 'addPackage', component: AddPackageComponent },
   { path: 'UserQueries', component: UserQueriesComponent },
   { path: 'showPackages', component: ShowPackagesComponent },
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'login', component: AdminBodyComponent},
   { path: 'logout', redirectTo: '', pathMatch: 'full' },
   { path: '', component: AdminBodyComponent }
 

@@ -3,6 +3,9 @@ package com.verscend.HappyTrip.CustomerController;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +22,13 @@ import com.verscend.HappyTrip.Entity.Customers;
 import com.verscend.HappyTrip.Entity.bookedStatus;
 import com.verscend.HappyTrip.Entity.Repository.CustomersRepository;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.validation.constraints.Email;
 
+@EnableGlobalMethodSecurity(prePostEnabled = true) 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/Customers")
@@ -44,18 +49,36 @@ public class CustomerController {
 //		System.out.println(cusRep.findById(id));
 //		return cusRep.findById(id);
 //	}	
-
-	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
-	public Customers getUser(@PathVariable String email) {
-
-		for(Booking b :  new ArrayList<>(cusRep.findByEmail(email).getBookings()))
+	
+	
+	@PreAuthorize("hasRole('USER')")
+	@RequestMapping(path = "/user/check", method = RequestMethod.GET)
+	public Customers getUserDetails(Principal principal) {
+		return cusRep.findByEmail(principal.getName());
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@RequestMapping(path = "/admin/check", method = RequestMethod.GET)
+	public Object getAdminDetails(Authentication authentication) {
+		return authentication.getDetails();
+	}
+	
+//	@RequestMapping(value = "/check",method = RequestMethod.GET)
+//	public Customers CheckUser(Principal principal) {
+//		return cusRep.findByEmail(principal.getName());
+//	}
+//	
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public Customers getUser(Principal principal) {
+		System.out.println("from/user"+principal.getName());
+		for(Booking b :  new ArrayList<>(cusRep.findByEmail(principal.getName()).getBookings()))
 		{
 			if(b.getBookedstatus() == bookedStatus.CANCELLED)
 			{
-				cusRep.findByEmail(email).getBookings().remove(b);
+				cusRep.findByEmail(principal.getName()).getBookings().remove(b);
 			}
 		}
-		return(cusRep.findByEmail(email));
+		return(cusRep.findByEmail(principal.getName()));
 	}
 
 	@RequestMapping(value = "/add/{email}", method = RequestMethod.POST)
@@ -120,6 +143,7 @@ public class CustomerController {
 
 		for (Customers c : cusRep.findAll()) {
 			if (c.getId() == id) {
+				
 				c.setBookings(booking);
 				cusRep.save(c);
 
@@ -127,9 +151,9 @@ public class CustomerController {
 		}
 	}
 
-	@RequestMapping(value = "/getBooking/{id}")
-	public List<Booking> getBookings(@PathVariable int id) {
-		Customers c= cusRep.findById(id); 
+	@RequestMapping(value = "/getBooking")
+	public List<Booking> getBookings(Principal principal) {
+		Customers c= cusRep.findByEmail(principal.getName()); 
 		return c.getBookings();
 //		for (Customers c : cusRep.findAll()) {
 //			if (c.getId() == id) {
@@ -160,16 +184,19 @@ public class CustomerController {
 	
 	
 	//getting the price of the booked packages 
-	@RequestMapping(value = "/getPrice/{email}",method = RequestMethod.GET)
-	public int getPrice(@PathVariable String email) {
+	@RequestMapping(value = "/getPrice",method = RequestMethod.GET)
+	public int getPrice(Principal principal) {
 		int price = 0;
-		for(Booking b: cusRep.findByEmail(email).getBookings())
+		for(Booking b: cusRep.findByEmail(principal.getName()).getBookings())
 		{
 			if(b.getBookedstatus()== bookedStatus.BOOKED) {
+				
 					price += Integer.parseInt(b.getPrice());
 				
 			}
 		}
+	
+		
 		return price;
 	}	
 

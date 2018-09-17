@@ -12,6 +12,7 @@ import { UserQueriesComponent } from './UserDashBoard/user-queries/user-queries.
 import { ShowPackagesComponent } from './UserDashBoard/show-packages/show-packages.component';
 import { AdminBodyComponent } from './UserDashBoard/admin-body/admin-body.component';
 import { AppHttpInterceptor } from './app-http-interceptor';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 
 
@@ -25,7 +26,7 @@ import { AppHttpInterceptor } from './app-http-interceptor';
     UserQueriesComponent,
     ShowPackagesComponent,
     AdminBodyComponent,
-    AppHttpInterceptor
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

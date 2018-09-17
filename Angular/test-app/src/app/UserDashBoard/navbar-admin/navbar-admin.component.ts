@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminServiceService } from '../../admin-service.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TokenServiceService } from '../../token-service.service';
 
 @Component({
   selector: 'app-navbar-admin',
@@ -8,7 +9,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./navbar-admin.component.css']
 })
 export class NavbarAdminComponent implements OnInit {
+  
+  LogOut(){
+    sessionStorage.removeItem("token");
+    this.tokenService.tokenEmitter.next(null);
 
+  }
   changePackageName() {
     this.adminservice.changeSuccess(false);
     this.adminservice.changelabel('Create');
@@ -33,7 +39,7 @@ export class NavbarAdminComponent implements OnInit {
     })
   }
 
-  constructor(private adminservice: AdminServiceService, private http: HttpClient) { }
+  constructor(private tokenService :TokenServiceService,private adminservice: AdminServiceService, private http: HttpClient) { }
 
   ngOnInit() {
 
